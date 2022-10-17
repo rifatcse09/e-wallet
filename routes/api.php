@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/token', [AccessTokenController::class, 'token']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::post('login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user-profile', [UserController::class, 'userProfile']);
+    Route::get('/convert-currency', [TransactionController::class, 'currencyApiCheck']);
+    Route::post('/send-money', [TransactionController::class, 'sendMoney']);
+    Route::get('/user-transaction-info', [TransactionController::class, 'userTransactionInfo']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});

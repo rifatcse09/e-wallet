@@ -16,10 +16,11 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sender_id')->constrained('users');
+            $table->string('sender_currency', '3')->notnull();
+            $table->decimal('sending_amount', 10, 2);
             $table->foreignId('receiver_id')->constrained('users');
-            $table->decimal('amount', 10, 2);
-            $table->decimal('currency_rate', 10, 6);
-            $table->decimal('total', 10, 2);
+            $table->string('receiver_currency', '3')->notnull();;
+            $table->decimal('receiving_amount', 10, 2);
             $table->timestamps();
         });
     }
