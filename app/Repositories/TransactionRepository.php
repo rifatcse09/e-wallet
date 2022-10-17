@@ -49,16 +49,16 @@ class TransactionRepository implements TransactionInterface
 
     public function getThirdHighestTransactionByUserId(int $userId): array
     {
-        $silver = DB::table("transactions")
+        $sendingAmount = DB::table("transactions")
             ->select(
                 "receiving_amount as transactionamount"
-            )->where("receiver_id", "=", 2);
+            )->where("receiver_id", "=", $userId);
 
         return DB::table("transactions")
             ->select(
                 "sending_amount as transactionamount"
-            )->where("sender_id", "=", 2)
-            ->unionAll($silver)
+            )->where("sender_id", "=", $userId)
+            ->unionAll($sendingAmount)
             ->offset(2)->limit(1)
             ->orderBy("transactionamount", "desc")
             ->get()->toArray();

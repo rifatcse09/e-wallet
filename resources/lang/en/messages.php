@@ -7,6 +7,7 @@ return [
         'mimes' => 'Invalid image format',
         'max' => 'Image size must be less thant 20MB',
     ],
+    'wallet_insufficient' => 'In sufficiant wallet amount ',
     'success_message' => 'Request successful',
     'error_message' => 'Request failed',
     'currency_convert_api_error' => 'Currency Conversion API error',
@@ -40,15 +41,15 @@ return [
         'url' => 'Image must be a valid url'
     ],
     'sender_id' => [
-        'required' => 'Please enter aSender Id',
-        'integer' => 'Sender Id should be numieric',
+        'required' => 'The sender id field is required.',
+        'integer' => 'The sender id must be numeric.',
     ],
     'receiver_id' => [
-        'required' => 'Please enter Sender Id',
-        'integer' => 'Sender Id should be numieric',
+        'required' => 'The receiver id field is required.',
+        'integer' => 'The receiver id must be numeric',
     ],
     'amount' => [
-        'required' => 'Please enter amount',
+        'required' => 'The amount field is required.',
     ],
 
 ];

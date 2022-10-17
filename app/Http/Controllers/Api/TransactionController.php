@@ -53,6 +53,10 @@ class TransactionController extends Controller
 
             $senderReciverInfo = $this->_UserRepos->getSenderAndReceiverInfo($request->all());
 
+            if ($request->amount > $senderReciverInfo['sender']['wallet'])
+
+                return $this::failure(__('messages.wallet_insufficient'), ['error' => 'Validation errors']);
+
             /* Currency Conversion start */
             $senderReciverInfo['receiver']['receiving_amount'] = $request->amount;
             $senderReciverInfo['sender']['sending_amount'] = $request->amount;
@@ -86,7 +90,7 @@ class TransactionController extends Controller
                 /* Mail start */
                 TransactionProcessed::dispatch($transaction);
 
-                return $this::success($transaction, __('messages.success_message'));
+                return $this::success($transaction, __('messages.success_message'), Response::HTTP_CREATED);
             } catch (\Exception $e) {
                 DB::rollback();
                 $this::failure($e->getMessage(), __('messages.transaction_failed'), Response::HTTP_INTERNAL_SERVER_ERROR);
