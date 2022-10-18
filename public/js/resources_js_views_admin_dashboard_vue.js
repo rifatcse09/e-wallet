@@ -24,7 +24,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       mostConversion: "",
       totalConverted: "",
       thirdHighestAmount: "",
-      wallet: ""
+      wallet: "",
+      mostConversionUser: ""
     };
   },
   mounted: function mounted() {
@@ -45,7 +46,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context.sent;
                 if (response.data.data) {
-                  _this.mostConversion = response.data.data.most_conversion.conversionQuantity;
+                  if (response.data.data.most_conversion !== null) {
+                    _this.mostConversion = response.data.data.most_conversion.conversionQuantity;
+                    _this.mostConversionUser = response.data.data.most_conversion.sender.name;
+                  }
                   _this.wallet = response.data.data.wallet;
                   _this.totalConverted = response.data.data.total_converted_amount;
                   _this.thirdHighestAmount = response.data.data.third_highest_amount;
@@ -99,7 +103,7 @@ var render = function render() {
     staticClass: "text-xs font-weight-bold text-primary text-uppercase mb-1"
   }, [_vm._v("\n                Total Amount Converted\n              ")]), _vm._v(" "), _c("div", {
     staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-  }, [_vm._v("\n                " + _vm._s(_vm.totalConverted) + "\n              ")])]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(_vm.totalConverted) + "\n              ")])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6 mb-4"
   }, [_c("div", {
     staticClass: "card border-left-success shadow h-100 py-2"
@@ -113,7 +117,7 @@ var render = function render() {
     staticClass: "text-xs font-weight-bold text-success text-uppercase mb-1"
   }, [_vm._v("\n                Third Highest Amount Converted\n              ")]), _vm._v(" "), _c("div", {
     staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-  }, [_vm._v("\n                " + _vm._s(_vm.thirdHighestAmount) + "\n              ")])]), _vm._v(" "), _vm._m(2)])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(_vm.thirdHighestAmount) + "\n              ")])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6 mb-4"
   }, [_c("div", {
     staticClass: "card border-left-info shadow h-100 py-2"
@@ -131,7 +135,7 @@ var render = function render() {
     staticClass: "col-auto"
   }, [_c("div", {
     staticClass: "h5 mb-0 mr-3 font-weight-bold text-gray-800"
-  }, [_vm._v("\n                    " + _vm._s(_vm.wallet) + "\n                  ")])])])]), _vm._v(" "), _vm._m(3)])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                    " + _vm._s(_vm.wallet) + "\n                  ")])])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-xl-3 col-md-6 mb-4"
   }, [_c("div", {
     staticClass: "card border-left-warning shadow h-100 py-2"
@@ -145,7 +149,9 @@ var render = function render() {
     staticClass: "text-xs font-weight-bold text-warning text-uppercase mb-1"
   }, [_vm._v("\n                Most Conversion\n              ")]), _vm._v(" "), _c("div", {
     staticClass: "h5 mb-0 font-weight-bold text-gray-800"
-  }, [_vm._v(_vm._s(_vm.mostConversion))])]), _vm._v(" "), _vm._m(4)])])])])])]);
+  }, [_vm._v(_vm._s(_vm.mostConversion))]), _vm._v(" "), _c("div", {
+    staticClass: "h5 mb-0 font-weight-bold text-gray-800"
+  }, [_vm._v(_vm._s(_vm.mostConversionUser))])])])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -162,38 +168,6 @@ var staticRenderFns = [function () {
   }, [_c("i", {
     staticClass: "fas fa-download fa-sm text-white-50"
   }), _vm._v(" Generate Report")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "col-auto"
-  }, [_c("i", {
-    staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
-  })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "col-auto"
-  }, [_c("i", {
-    staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
-  })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "col-auto"
-  }, [_c("i", {
-    staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
-  })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "col-auto"
-  }, [_c("i", {
-    staticClass: "fas fa-comments fa-2x text-gray-300"
-  })]);
 }];
 render._withStripped = true;
 

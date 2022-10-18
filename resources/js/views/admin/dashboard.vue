@@ -32,9 +32,9 @@
                   {{totalConverted}}
                 </div>
               </div>
-              <div class="col-auto">
+              <!-- <div class="col-auto">
                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -60,9 +60,9 @@
                   {{thirdHighestAmount}}
                 </div>
               </div>
-              <div class="col-auto">
+              <!-- <div class="col-auto">
                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -87,9 +87,9 @@
                   </div>
                 </div>
               </div>
-               <div class="col-auto">
+               <!-- <div class="col-auto">
                   <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                </div>
+                </div> -->
             </div>
           </div>
         </div>
@@ -112,10 +112,11 @@
                   Most Conversion
                 </div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{mostConversion}}</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{mostConversionUser}}</div>
               </div>
-              <div class="col-auto">
+              <!-- <div class="col-auto">
                 <i class="fas fa-comments fa-2x text-gray-300"></i>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -138,6 +139,7 @@ export default {
       totalConverted: "",
       thirdHighestAmount: "",
       wallet: "",
+      mostConversionUser:""
     };
   },
   
@@ -149,7 +151,10 @@ export default {
       try {
         const response = await axios.get("user-transaction-info");
         if (response.data.data){
-          this.mostConversion = response.data.data.most_conversion.conversionQuantity;
+          if (response.data.data.most_conversion !== null){
+            this.mostConversion = response.data.data.most_conversion.conversionQuantity;
+            this.mostConversionUser = response.data.data.most_conversion.sender.name;
+          }         
           this.wallet = response.data.data.wallet;
           this.totalConverted = response.data.data.total_converted_amount;
           this.thirdHighestAmount = response.data.data.third_highest_amount;
