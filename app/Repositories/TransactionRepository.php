@@ -40,7 +40,7 @@ class TransactionRepository implements TransactionInterface
 
     public function getMostConversion(): ?Transaction
     {
-        return Transaction::select('sender_id', DB::raw('count(id) as conversionQuantity'))
+        return Transaction::with('sender')->select('sender_id', DB::raw('count(sending_amount) as conversionQuantity'))
             ->whereRaw('sender_currency != receiver_currency')
             ->groupBy('sender_id')
             ->orderBy('conversionQuantity', 'desc')

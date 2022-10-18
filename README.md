@@ -2,7 +2,7 @@
 
 ## Description
 
-The task is developed by Laravel 8. Laravel Repository Pattern is used for development. Laravel Passport is used for API authentication. Frontend is developed by simply Laravel Blade. The API of http://fixer.io is used for currency conversion. In development, SOLID design principles are fully followed for coding. The task has PHPUnit test case.
+The task is developed by Laravel 8. Laravel Repository Pattern is used for development. Laravel Passport is used for API authentication. Frontend is developed by Vue JS SB Admin Template. The API of http://fixer.io is used for currency conversion. In development, SOLID design principles are fully followed for coding. The task has PHPUnit test case.
 
 ### Installation
 
@@ -58,13 +58,25 @@ $ php artisan passport:install
 $ php artisan passport:keys
 ```
 
-9. Run the server
+9. Install dependency with NPM
+ 
+```
+ npm install
+```
+
+10. Develop
+
+ ```
+ npm run dev
+ ```
+ 
+11. Run the server
 
 ```
 $ php artisan serve
 ```
 
-10. Run phpUnit Test
+12. Run phpUnit Test
 
 ```
 $ ./vendor/bin/phpunit

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -14,6 +15,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function model()
     {
         return User::class;
+    }
+
+    public function usersListExceptOwn($id): Collection
+    {
+        $builder = $this->model;
+        return $builder::with('currency')->where('id', '!=', $id)->get();
     }
 
     public function getUserById($id): User
@@ -27,12 +34,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return auth()->user();
     }
 
-    public function updateUser(int $userId, array $newDetails): User
+    public function updateUser(int $userId, array $newDetails)
     {
-        $model = $this->model->findOrFail($userId);
-        $model->fill($newDetails);
-        $model->save();
-        return $model;
+
+        return $this->model::where('id', $userId)
+            ->update([
+                'wallet' => $newDetails['wallet']
+            ]);
     }
 
     public function getSenderAndReceiverInfo($request): array

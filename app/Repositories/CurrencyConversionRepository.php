@@ -25,7 +25,6 @@ class CurrencyConversionRepository  implements CurrencyConversionInterface
                 'to' => $toCurrency,
                 'amount' => $amount,
             ]);
-
         return $this->currencyConvertResult($currencyConversion);
     }
 

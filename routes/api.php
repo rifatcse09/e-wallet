@@ -21,6 +21,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user-profile', [UserController::class, 'userProfile']);
+    Route::get('/user-list', [UserController::class, 'usersListExceptOwn']);
     Route::get('/convert-currency', [TransactionController::class, 'currencyApiCheck']);
     Route::post('/send-money', [TransactionController::class, 'sendMoney']);
     Route::get('/user-transaction-info', [TransactionController::class, 'userTransactionInfo']);

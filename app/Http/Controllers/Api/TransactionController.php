@@ -93,7 +93,7 @@ class TransactionController extends Controller
                 return $this::success($transaction, __('messages.success_message'), Response::HTTP_CREATED);
             } catch (\Exception $e) {
                 DB::rollback();
-                $this::failure($e->getMessage(), __('messages.transaction_failed'), Response::HTTP_INTERNAL_SERVER_ERROR);
+                return $this::failure($e->getMessage(), __('messages.transaction_failed'), Response::HTTP_INTERNAL_SERVER_ERROR);
             }
             /* Transaction end */
         } catch (\Exception $e) {

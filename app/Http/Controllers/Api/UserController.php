@@ -26,4 +26,11 @@ class UserController extends Controller
 
         return is_null($userInfo) ? $this::failure(__('oauth.user_not_found')) : $this::success($userInfo, __('messages.success_message'));
     }
+    public function usersListExceptOwn(): JsonResponse
+    {
+        $userInfo = $this->_UserRepos->getAuthUser();
+        $userList = $this->_UserRepos->usersListExceptOwn($userInfo->id);
+
+        return is_null($userList) ? $this::failure(__('oauth.user_not_found')) : $this::success($userList, __('messages.success_message'));
+    }
 }

@@ -28,7 +28,10 @@ final class AuthController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         return $this->isVerifiedUser($request) ?
-            $this::success($success['token'] = $this->getAccessToken(), __('messages.success_message')) :
+            $this::success([
+                'token' => $this->getAccessToken(),
+                'user' => Auth::user()
+            ], __('messages.success_message')) :
             $this::failure('Unauthorised.', ['error' => __('oauth.user_not_found')]);
     }
 
@@ -48,21 +51,4 @@ final class AuthController extends Controller
 
         return  $this::success(null, __('oauth.logout_success'), Response::HTTP_NOT_FOUND);
     }
-
-    // /**
-    //  * Display the authenticated user details.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-
-    //     $user = User::find($id);
-
-    //     if (is_null($user)) {
-    //         return $this->sendError('User not found.');
-    //     }
-
-    //     return $this->sendResponse($user, 'User retrieved successfully.');
-    // }
 }
